@@ -5,7 +5,7 @@
 
 <div *ngIf="showUserForm" class="card card-body mb-2 list-unstyled" style="width: 38rem;">
   <h3>REGISTER</h3>
-  <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm) && open(mymodal)" class="card card-body mb-2 list-unstyled">
+  <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)" class="card card-body mb-2 list-unstyled">
 
     <div class="form-group">
       <label>First Name</label>
