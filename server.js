@@ -9,9 +9,10 @@ const app = express();
 app.use(express.static(path.join(__dirname + '/dist/reveryencom')));
 
 app.get('*', function(req,res) {
-
 res.sendFile(path.join(__dirname+'/dist/reveryencom/index.html'));
 });
+
+
 
 // Start the app by listening on the default Heroku port
 app.listen(process.env.PORT || 3000, (req, res) => {

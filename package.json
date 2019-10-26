@@ -1,5 +1,5 @@
 {
-  "name": "reveryencom",
+  "name": "reveryancom",
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
@@ -69,12 +69,12 @@
   "main": "karma.conf.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rald0010/reveryencomapp.git"
+    "url": "https://github.com/rald0010/reveryapp.git"
   },
   "author": "Christian Gerald J. Delfino",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/rald0010/reveryencomapp/issues"
+    "url": "https://github.com/rald0010/reveryapp/issues"
   },
-  "homepage": "https://github.com/rald0010/reveryencomapp#readme"
+  "homepage": "https://github.com/rald0010/reveryapp#readme"
 }
