@@ -24,14 +24,23 @@ import {
 import {
   of
 } from 'rxjs/observable/of';
+import {
+  NgbModal,
+  ModalDismissReasons,
+  NgbModalOptions
+} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
-export class UsersComponent implements OnInit {
 
+
+export class UsersComponent implements OnInit {
+  modalOptions: NgbModalOptions;
+
+  closeResult: string;
   newuser: User = {
     firstName: '',
     lastName: '',
@@ -55,7 +64,7 @@ export class UsersComponent implements OnInit {
   currentClasses: {};
   currentStyles: {};
   loggedIn: boolean;
-  showUserForm: boolean = false;
+  showUserForm: boolean = true;
 
 
   @ViewChild.bind('userForm') form: any;
@@ -64,34 +73,56 @@ export class UsersComponent implements OnInit {
   itemValue: '';
   items: Observable < any[] > ;
 
+  constructor(private userService: UserService, public db: AngularFirestore, public database: AngularFireDatabase, private modalService: NgbModal) {
+
+    this.modalOptions = {
+      backdrop: 'static',
+      backdropClass: 'customBackdrop'
+    }
 
 
-  constructor(private dataService: UserService,
-    public db: AngularFirestore,
-    public database: AngularFireDatabase, ) {
-
-
-    // setTimeout(() => {
-    //   this.users = this.data;
-    //   this.loaded = true;
-    // }, 5000);
+    setTimeout(() => {
+      this.users = this.data;
+      this.loaded = true;
+    }, 5000);
     this.getUS().subscribe(data => {
-    // this.dataService.getUser().subscribe(users => {
-    //     // setTimeout(() => {
-    //     //   this.users = this.data;
-    //     //   this.loaded = true;
-    //     // }, 5000);
-    //   });
+      // this.userService.getUser().subscribe(users => {
+      //     // setTimeout(() => {
+      //     //   this.users = this.data;
+      //     //   this.loaded = true;
+      //     // }, 5000);
+      //   });
       //console.log(data);
     });
 
   }
 
 
+  open(content) {
+    this.modalService.open(content, this.modalOptions).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
+
+
+
 
 
   ngOnInit() {
-    this.dataService.getData().subscribe((data: User[]) => {
+    this.userService.getData().subscribe((data: User[]) => {
       console.log(data);
     })
     this.setCurrentClasses();
@@ -186,7 +217,7 @@ export class UsersComponent implements OnInit {
       value.isActive = true;
       value.registered = new Date();
       value.hide = true;
-      this.dataService.addUser(value);
+      this.userService.addUser(value);
       console.log(value);
 
 

@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'reveryencom';
 
-  token = 'Hello my name is Rald! :)';
+
 
 
 }

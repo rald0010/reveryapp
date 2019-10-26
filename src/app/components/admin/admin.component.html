@@ -1,0 +1,42 @@
+<ul class="list-unstyled" *ngIf="loaded && users?.length > 0">
+  <li class="card card-body mb-2" *ngFor="let user of users" [class.bg-light]="user.registered"
+    [style.border-color]="user.registered ? 'green':''">
+    <div class="row">
+      <div class="col">
+        <ngx-qrcode qrc-element-type="url" [qrc-value]=user.voter+user.email></ngx-qrcode>
+        <br>
+        <img *ngIf="user.image" class="img-fliud" [src]="user.image" alt="">
+      </div>
+
+      <div class="col">
+        <h3>{{user.firstName}} {{user.lastName}} <small> <button (click)="user.hide = !user.hide
+          " class="btn btn-dark btn-sm"> <i [ngClass]="user.hide? 'fa fa-plus' : 'fa fa-minus'"></i> </button> </small>
+        </h3>
+        <ul class="list-group" *ngIf="!user.hide">
+          <!-- <li class="list-group-item">Age: {{user.age}}</li> -->
+          <li class="list-group-item">Email: {{user.email}}</li>
+          <li class="list-group-item">Joined: {{user.registered }}</li>
+          <!-- <li class="list-group-item"> Address: {{user.address.street}} {{user.address.city}} {{user.address.province}}</li> -->
+          <li class="list-group-item">Position: {{user.position}}</li>
+          <li class="list-group-item">Voter: {{user.voter}}</li>
+
+        </ul>
+
+      </div>
+    </div>
+
+  </li>
+
+</ul>
+
+<div *ngIf="!loaded" class="d-flex justify-content-center">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
+<h3 *ngIf="users?.length == 0">No Users Found!</h3>
+
+
+
+
