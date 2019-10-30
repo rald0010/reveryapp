@@ -7,6 +7,23 @@
   <h3>REGISTER</h3>
   <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)" class="card card-body mb-2 list-unstyled">
 
+
+    <li  >
+      <div class="row" style="height: 100px;">
+        <div class="col">
+            <label>Choose an Imge for your ID:</label>
+            <input #file type="file" accept='image/*' (change)="preview(file.files)" />
+        </div>
+        <div class="col">
+            <figure class="rounded float-right" style="width: 102px; height: 102px; border: 1px solid #000">
+            <img [src]="imgURL"class="rounded float-right"  *ngIf="imgURL" height="100" width="100" style="border: black;">
+          </figure>
+        </div>
+
+      </div>
+
+    </li>
+
     <div class="form-group">
       <label>First Name</label>
       <input type="text" [(ngModel)]="newuser.firstName"
@@ -87,13 +104,36 @@
       <div [hidden]="!userVoter.errors?.minlength" class="invalid-feedback">
         Please specify if you're a Voter.
       </div>
+    </div>
+
+
+    <div class="form-group">
+
+      <!-- <label for="file">Choose Image:</label>
+      <div >
+        <input type="file"
+        (change)="upload($event)"
+        accept=".png,.jpg"
+        #uploadimage
+        id="uplImg"/>
+      </div> -->
+      <!--
+      <button type="button" (click)="uploadimage.click()" (change)="uploadimage.itemValue()"  class="btn btn-primary btn-sm float-left waves-effect waves-light">File</button> -->
+
+
+
+
+
+
+
 
     </div>
 
-    <button [disabled]="!userForm.form.valid" (click)="open(mymodal)" class="btn btn-dark btn-block mb-3">REGISTER</button>
 
 
 
+    <button [disabled]="!userForm.form.valid" (click)="open(mymodal)"
+      class="btn btn-dark btn-block mb-3">REGISTER</button>
 
 
     <ng-template #mymodal let-modal>
@@ -112,21 +152,6 @@
       </div>
     </ng-template>
 
-
-
-
-
-
   </form>
 
 </div>
-
-
-
-
-
-
-
-
-
-

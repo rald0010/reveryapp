@@ -1,3 +1,6 @@
+@import "~mdbootstrap/css/mdb.min.css";
+
+
 .big-text {
   text-transform: uppercase
 }
@@ -35,3 +38,5 @@
     .light-blue-backdrop {
       background-color: #5cb3fd;
     }
+
+

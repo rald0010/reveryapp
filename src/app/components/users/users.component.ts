@@ -29,6 +29,9 @@ import {
   ModalDismissReasons,
   NgbModalOptions
 } from '@ng-bootstrap/ng-bootstrap';
+import {
+  AngularFireStorage
+} from 'angularfire2/storage';
 
 @Component({
   selector: 'app-users',
@@ -38,6 +41,11 @@ import {
 
 
 export class UsersComponent implements OnInit {
+  public imagePath;
+  imgURL: any;
+  public message: string;
+
+
   modalOptions: NgbModalOptions;
 
   closeResult: string;
@@ -73,12 +81,16 @@ export class UsersComponent implements OnInit {
   itemValue: '';
   items: Observable < any[] > ;
 
-  constructor(private userService: UserService, public db: AngularFirestore, public database: AngularFireDatabase, private modalService: NgbModal) {
+  constructor(private afStorage: AngularFireStorage, private userService: UserService, public db: AngularFirestore, public database: AngularFireDatabase, private modalService: NgbModal) {
 
     this.modalOptions = {
       backdrop: 'static',
       backdropClass: 'customBackdrop'
     }
+
+
+
+
 
 
     setTimeout(() => {
@@ -96,6 +108,40 @@ export class UsersComponent implements OnInit {
     });
 
   }
+
+
+  upload(event) {
+    this.afStorage.upload('/upload/to/this-path', event.target.files[0]);
+    const randomId = Math.random().toString(36).substring(2);
+    const ref = this.afStorage.ref(randomId);
+    const task = ref.put(event.target.files[0]);
+
+  }
+
+
+  preview(files) {
+    if (files.length === 0)
+      return;
+
+    var mimeType = files[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+      this.message = "Only images are supported.";
+      return;
+    }
+
+    var reader = new FileReader();
+    this.imagePath = files;
+    reader.readAsDataURL(files[0]);
+    reader.onload = (_event) => {
+      this.imgURL = reader.result;
+    }
+  }
+
+
+
+
+
+
 
 
   open(content) {

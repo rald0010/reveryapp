@@ -16,6 +16,11 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AdminComponent } from './components/admin/admin.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
+import {
+  AngularFireStorage
+} from 'angularfire2/storage';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCQ93qaJUFKizzy-hBobDr4lDfWJ81tEdQ',
@@ -47,7 +52,8 @@ const firebaseConfig = {
     AngularFireAuthModule, // auth
     AngularFireStorageModule, // storage
     AngularFireDatabaseModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MDBBootstrapModule
 
 
   ],
