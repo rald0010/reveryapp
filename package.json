@@ -31,7 +31,7 @@
     "express": "^4.17.1",
     "firebase": "^7.2.2",
     "font-awesome": "^4.7.0",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "mdbootstrap": "^4.8.11",
     "ngx-qrcode2": "0.0.9",
     "path": "^0.12.7",
